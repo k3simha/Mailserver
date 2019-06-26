@@ -6,17 +6,22 @@ apt-get update
 apt-get install python-certbot-nginx
 certbot --nginx
 
+echo Enter your domain name
+read domain_name
+
 apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
 
 mysql_secure_installation
 
 mysqladmin -u root -p create mailserver
 
-mysql -u root -pNarsimha@1998 < sqlscript.sql
+sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript_modified.sql
+
+mysql -u root -pNarsimha@1998 < sqlscript_modified.sql
 
 cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
-
-cp postfix_main.cf /etc/postfix/main.cf 
+ 
+sed "s/example.com/$domain_name/g" postfix_main.cf > /etc/postfix/main.cf
 
 cp mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf 
 
@@ -48,6 +53,7 @@ cp /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.orig
 cp dovecot.conf /etc/dovecot/dovecot.conf
 
 cp 10-mail.conf /etc/dovecot/conf.d/10-mail.conf
+sed "s/example.com/$domain_name/g" 10-ssl.conf > /etc/dovecot/conf.d/10-ssl.conf
 
 mkdir -p /var/mail/vhosts/example.com
 
@@ -60,12 +66,11 @@ cp 10-auth.conf /etc/dovecot/conf.d/10-auth.conf
 
 cp auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
 
-cp dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
+sed "s/example.com/$domain_name/g" sql.conf.ext > /etc/dovecot/dovecot-sql.conf.ext
 
 chown -R vmail:dovecot /etc/dovecot
 chmod -R o-rwx /etc/dovecot
 
 cp 10-master.conf /etc/dovecot/conf.d/10-master.conf
-cp 10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
 
 sudo systemctl restart dovecot
