@@ -1,30 +1,71 @@
-sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx
-sudo certbot --nginx
+sudo su
+apt-get update
+apt-get install software-properties-common
+add-apt-repository ppa:certbot/certbot
+apt-get update
+apt-get install python-certbot-nginx
+certbot --nginx
 
-sudo apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
+apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
 
-sudo mysql_secure_installation
+mysql_secure_installation
 
-sudo mysqladmin -u root -p create mailserver
+mysqladmin -u root -p create mailserver
 
-sudo mysql -u root -pNarsimha@1998 < sqlscript.sql
+mysql -u root -pNarsimha@1998 < sqlscript.sql
 
-sudo cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
+cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
 
-nano /etc/postfix/main.cf > postfix_main.cf
+cp postfix_main.cf /etc/postfix/main.cf 
 
-nano /etc/postfix/mysql-virtual-mailbox-domains.cf > mysql-virtual-mailbox-domains.cf
+cp mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf 
 
-nano /etc/postfix/mysql-virtual-mailbox-maps.cf > mysql-virtual-mailbox-maps.cf 
+cp mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf 
 
-nano /etc/postfix/mysql-virtual-alias-maps.cf > mysql-virtual-alias-maps.cf
+cp mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf 
 
-nano /etc/postfix/mysql-virtual-email2email.cf > mysql-virtual-email2email.cf
+cp mysql-virtual-email2email.cf /etc/postfix/mysql-virtual-email2email.cf 
 
-sudo systemctl restart postfix
+systemctl restart postfix
 
-sudo cp /etc/postfix/master.cf /etc/postfix/master.cf.orig
+cp /etc/postfix/master.cf /etc/postfix/master.cf.orig
+
+cp postfix_master.cf /etc/postfix/master.cf
+
+chmod -R o-rwx /etc/postfix
+
+systemctl restart postfix
+
+#configuring Dovecot
+
+cp /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf.orig
+cp /etc/dovecot/conf.d/10-mail.conf /etc/dovecot/conf.d/10-mail.conf.orig
+cp /etc/dovecot/conf.d/10-auth.conf /etc/dovecot/conf.d/10-auth.conf.orig
+cp /etc/dovecot/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext.orig
+cp /etc/dovecot/conf.d/10-master.conf /etc/dovecot/conf.d/10-master.conf.orig
+cp /etc/dovecot/conf.d/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf.orig
+
+cp dovecot.conf /etc/dovecot/dovecot.conf
+
+cp 10-mail.conf /etc/dovecot/conf.d/10-mail.conf
+
+mkdir -p /var/mail/vhosts/example.com
+
+sudo groupadd -g 5000 vmail
+sudo useradd -g vmail -u 5000 vmail -d /var/mail
+
+sudo chown -R vmail:vmail /var/mail
+
+cp 10-auth.conf /etc/dovecot/conf.d/10-auth.conf
+
+cp auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
+
+cp dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
+
+chown -R vmail:dovecot /etc/dovecot
+chmod -R o-rwx /etc/dovecot
+
+cp 10-master.conf /etc/dovecot/conf.d/10-master.conf
+cp 10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
+
+sudo systemctl restart dovecot
