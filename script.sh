@@ -15,12 +15,16 @@ mysql_secure_installation
 
 mysqladmin -u root -p create mailserver
 
-sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript_modified.sql
+echo Enter the MySql Database password
+read mysqlpassword
+
+sed "s/mailuserpass/$mysqlpassword/g" sqlscript.sql > sqlscript1.sql
+sed "s/example.com/$domain_name/g" sqlscript1.sql > sqlscript_modified.sql
+rm sqlscript.sql
+rm sqlscript1.sql
 
 mysql -u root -pNarsimha@1998 < sqlscript_modified.sql
 
-echo Enter the MySql Database password
-read mysqlpassword
 
 cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
  
