@@ -19,17 +19,20 @@ sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript_modified.sql
 
 mysql -u root -pNarsimha@1998 < sqlscript_modified.sql
 
+echo Enter the MySql Database password
+read mysqlpassword
+
 cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
  
 sed "s/example.com/$domain_name/g" postfix_main.cf > /etc/postfix/main.cf
 
-cp mysql-virtual-mailbox-domains.cf /etc/postfix/mysql-virtual-mailbox-domains.cf 
+sed "s/mailuserpass/$mysqlpassword/g" mysql-virtual-mailbox-domains.cf > /etc/postfix/mysql-virtual-mailbox-domains.cf 
 
-cp mysql-virtual-mailbox-maps.cf /etc/postfix/mysql-virtual-mailbox-maps.cf 
+sed "s/mailuserpass/$mysqlpassword/g" mysql-virtual-mailbox-maps.cf > /etc/postfix/mysql-virtual-mailbox-maps.cf 
 
-cp mysql-virtual-alias-maps.cf /etc/postfix/mysql-virtual-alias-maps.cf 
+sed "s/mailuserpass/$mysqlpassword/g" mysql-virtual-alias-maps.cf > /etc/postfix/mysql-virtual-alias-maps.cf 
 
-cp mysql-virtual-email2email.cf /etc/postfix/mysql-virtual-email2email.cf 
+sed "s/mailuserpass/$mysqlpassword/g" mysql-virtual-email2email.cf > /etc/postfix/mysql-virtual-email2email.cf 
 
 systemctl restart postfix
 
