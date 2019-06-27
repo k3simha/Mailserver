@@ -70,4 +70,19 @@ chmod -R o-rwx /etc/dovecot
 
 cp 10-master.conf /etc/dovecot/conf.d/10-master.conf
 
+sudo apt-get remove nginx nginx-common
+
 sudo systemctl restart dovecot
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get install squirrelmail
+
+sudo cp /etc/squirrelmail/apache.conf /etc/apache2/sites-available/squirrelmail.conf
+
+sed "s/example.com/$domain_name/g" squirrelmail.conf > /etc/apache2/sites-available/squirrelmail
+
+sudo a2ensite squirrelmail.conf
+/etc/init.d/apache2 start
+
+sudo systemctl reload apache2.service
