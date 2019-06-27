@@ -63,7 +63,7 @@ cp 10-auth.conf /etc/dovecot/conf.d/10-auth.conf
 
 cp auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
 
-sed "s/example.com/$domain_name/g" sql.conf.ext > /etc/dovecot/dovecot-sql.conf.ext
+sed "s/example.com/$domain_name/g" dovecot-sql.conf.ext > /etc/dovecot/dovecot-sql.conf.ext
 
 chown -R vmail:dovecot /etc/dovecot
 chmod -R o-rwx /etc/dovecot
