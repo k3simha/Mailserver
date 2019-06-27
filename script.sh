@@ -13,8 +13,8 @@ apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d d
 mysql_secure_installation
 
 mysqladmin -u root -p create mailserver
-
-mysql -u root -pNarsimha@1998 < sqlscript.sql
+sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript1.sql
+mysql -u root -pNarsimha@1998 < sqlscript1.sql
 
 cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
  
