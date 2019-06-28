@@ -14,7 +14,7 @@ mysql_secure_installation
 
 mysqladmin -u root -p create mailserver
 sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript1.sql
-mysql -u root -D mailserver-p < sqlscript1.sql
+mysql -u root -D mailserver -p < sqlscript1.sql
 
 cp /etc/postfix/main.cf /etc/postfix/main.cf.orig
  
