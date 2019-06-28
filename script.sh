@@ -52,7 +52,7 @@ cp dovecot.conf /etc/dovecot/dovecot.conf
 cp 10-mail.conf /etc/dovecot/conf.d/10-mail.conf
 sed "s/example.com/$domain_name/g" 10-ssl.conf > /etc/dovecot/conf.d/10-ssl.conf
 
-mkdir -p /var/mail/vhosts/example.com
+mkdir -p /var/mail/vhosts/$domain_name
 
 sudo groupadd -g 5000 vmail
 sudo useradd -g vmail -u 5000 vmail -d /var/mail
