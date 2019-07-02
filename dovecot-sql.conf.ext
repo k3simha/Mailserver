@@ -78,7 +78,7 @@ connect = host=127.0.0.1 dbname=mailserver user=mailuser password=mailuserpass
 # List of supported schemes is in
 # http://wiki2.dovecot.org/Authentication/PasswordSchemes
 #
-#default_pass_scheme = MD5
+default_pass_scheme = SHA512-CRYPT
 
 # passdb query to retrieve the password. It can return fields:
 #   password - The user's password. This field must be returned.
