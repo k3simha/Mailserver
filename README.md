@@ -10,4 +10,16 @@ To Create the mail server, follow the steps given below:
 
                                                         sudo su
                                                         
-2. Enter the following command to clone the git repositry
+2. Enter the following command to clone the git repositry on to your instance.
+                                                        
+                                    git clone https://github.com/k3simha/mailserver.git
+                                    
+3. Change the directory to the mailserver
+                                                 
+                                                      cd mailserver
+                                                 
+4. Change the permissions of the scripts.sh file.
+                                        
+                                                  chmod +x scripts.sh
+
+5. Run the file 
