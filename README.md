@@ -23,3 +23,12 @@ To Create the mail server, follow the steps given below:
                                                   chmod +x scripts.sh
 
 5. Run the file 
+
+                                                      ./script.sh
+
+Enter all the details required and the mail server will be ready.
+
+Considering example.com as your domain
+To open the login page for your mailserver, open example.com/squirrelmail
+By default, the email IDs created will be:
+1. Email - email1@example.com
