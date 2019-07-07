@@ -73,8 +73,8 @@ cp 10-master.conf /etc/dovecot/conf.d/10-master.conf
 sudo apt-get remove -y nginx nginx-common
 
 sudo systemctl restart dovecot
-sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 sudo apt-get install -y squirrelmail
 
