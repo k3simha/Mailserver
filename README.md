@@ -67,7 +67,7 @@ If you see an error like mentioned below when you open the mail login page,
                                         Error connecting to IMAP server: localhost.
                                         111 : Connection refused
                                         
-The reason for this might be that IMAP is supposed to be hearing at port 143, then
+The reason for this might be that IMAP is supposed to be hearing at port 143 but it is not, then
 
                                                 service postfix restart
                                                 service dovecot restart
