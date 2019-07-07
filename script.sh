@@ -1,14 +1,14 @@
-apt-get update
-apt-get install software-properties-common
+apt-get -y update
+apt-get install -y software-properties-common
 add-apt-repository ppa:certbot/certbot
 apt-get update
-apt-get install python-certbot-nginx
+apt-get install -y python-certbot-nginx
 certbot --nginx
 
 echo Enter your domain name
 read domain_name
 
-apt-get install postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
+apt-get install -y postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
 
 mysql_secure_installation
 
@@ -70,13 +70,13 @@ chmod -R o-rwx /etc/dovecot
 
 cp 10-master.conf /etc/dovecot/conf.d/10-master.conf
 
-sudo apt-get remove nginx nginx-common
+sudo apt-get remove -y nginx nginx-common
 
 sudo systemctl restart dovecot
 sudo apt-get update
 sudo apt-get upgrade
 
-sudo apt-get install squirrelmail
+sudo apt-get install -y squirrelmail
 
 sudo cp /etc/squirrelmail/apache.conf /etc/apache2/sites-available/squirrelmail.conf
 
