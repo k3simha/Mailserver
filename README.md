@@ -20,7 +20,7 @@ To Create the mail server, follow the steps given below:
                                                  
 4. Change the permissions of the scripts.sh file.
                                         
-                                                  chmod +x scripts.sh
+                                                  chmod +x script.sh
 
 5. Run the file 
 
