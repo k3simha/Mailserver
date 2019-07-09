@@ -85,7 +85,7 @@ The reason for this might be that IMAP is supposed to be hearing at port 143 but
                                                 service postfix restart
                                                 service dovecot restart
                                                 
-Then if you see any error after executing them, then solve them and try to open the login page again.
+Then if you see any error after executing them, solve them and try to open the login page again.
 
 
 ______________________________________________________________________________________________________________________________
