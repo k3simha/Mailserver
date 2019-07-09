@@ -10,7 +10,15 @@ read domain_name
 
 apt-get install -y postfix postfix-mysql dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql mysql-server
 
-mysql_secure_installation
+mysql_secure_installation << EOF
+
+n
+n
+y
+y
+y
+y
+EOF
 
 mysqladmin -u root -p create mailserver
 sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript1.sql
