@@ -26,6 +26,8 @@ To Create the mail server, follow the steps given below:
 
                                                       ./script.sh
 
+In the Postfix Configuration Window, select general type of mail configuration as Internet Site and in the next window enter your domain name as the system mail name.
+
 Enter all the details required and the mail server will be ready.
 
 Considering example.com as your domain
@@ -58,8 +60,19 @@ Steps to add a new email into the database:
 
                                                           quit
                                                           
+_______________________________________________________________________________________________________________________________________
+                                                          
+Mysql Database name:  mailserver
+Database user - mailuser
+Database user's password - mailuserpass
+host - 127.0.0.1
+Anonymous users - Removed
+Root Login Remotely - Disallowed
+Test Database and access to it - removed
+
 NOTE: If you see that an error that make sure that you have set the A domain correctly even having a proper A record in the DNS management of domain, then give some time gap before running the code again. This error might because of the reason that once you update a DNS record in your domain it might take some time to get updated, and the domain certificate that you need to obtain to establish a mail server will need the A record in the domain to be set.
 
+NOTE: For any errors that you face you can refer to the logs as all the errors are recoreded.
 
 If you see an error like mentioned below when you open the mail login page,
 
@@ -73,3 +86,15 @@ The reason for this might be that IMAP is supposed to be hearing at port 143 but
                                                 service dovecot restart
                                                 
 Then if you see any error after executing them, then solve them and try to open the login page again.
+
+
+______________________________________________________________________________________________________________________________
+
+You will be able to send the mail from the squirrel mail page that you have in your domain, but when the mail will be sent, it will end up in spam box of the receiver. This is because of no authentication of your email service.
+
+To make your mail service authentic, use websites like mail-tester.com from where we can know the places where your mail server is to be improved.
+
+Follow this tutorial for email authentication:
+
+                                https://www.siteground.com/tutorials/email/authentication/
+
