@@ -19,7 +19,7 @@ y
 y
 y
 EOF
-
+echo Here password refers to MySql password
 mysqladmin -u root -p create mailserver
 sed "s/example.com/$domain_name/g" sqlscript.sql > sqlscript1.sql
 mysql -u root -D mailserver -p < sqlscript1.sql
