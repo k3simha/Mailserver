@@ -63,11 +63,17 @@ Steps to add a new email into the database:
 _______________________________________________________________________________________________________________________________________
                                                           
 Mysql Database name:  mailserver
+
 Database user - mailuser
+
 Database user's password - mailuserpass
+
 host - 127.0.0.1
+
 Anonymous users - Removed
+
 Root Login Remotely - Disallowed
+
 Test Database and access to it - removed
 
 NOTE: If you see that an error that make sure that you have set the A domain correctly even having a proper A record in the DNS management of domain, then give some time gap before running the code again. This error might because of the reason that once you update a DNS record in your domain it might take some time to get updated, and the domain certificate that you need to obtain to establish a mail server will need the A record in the domain to be set.
