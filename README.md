@@ -1,4 +1,4 @@
-# mailserver
+# Mailserver
 Script.sh is a bash script written to directly create a mailserver of your own using Postfix, Dovecot, SquirrelMail and AWS.
 
 Prerequisites:
